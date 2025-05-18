@@ -17,19 +17,29 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
 
-  //GETTIGN CPUtemp
-  ipcMain.handle("getCPUTemp", async () =>{
+  //GETTING CPUtemp
+  ipcMain.handle("getCPUTemp", async () => {
+    try {
+      const cpuTemp = await si.cpuTemperature();
+      return cpuTemp;
+    }
+    catch(error) {
+      console.error("CPU TEMP FETCH ERROR:", error);
+      return { error: "Error getting the cpu temp" };
+    }
+  });
+
+  //getting cpu usage
+  ipcMain.handle("getCPUUsage", async () =>{
     try{
-      const cpuTemp = await si.cpuTemperature()
-      return cpuTemp
+      const cpuUsage = (await si.currentLoad()).currentLoad;
+      return cpuUsage;
     }
     catch(error){
-      console.error("CPU TEMP FETCH ERROR")
-      cpuTemp = "Error getting the cpu temp"
-      return cpuTemp
+      console.error("CPU USAGE FIND ERROR");
+      return { error: "error getting cpu usage"}
     }
-  } )
-
+  })
 
   createWindow()
 
