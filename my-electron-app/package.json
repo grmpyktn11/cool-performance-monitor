@@ -1,0 +1,26 @@
+{
+  "name": "resource-monitor",
+  "version": "1.0.0",
+  "description": "a cool looking monitor",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grmpyktn11/cool-performance-monitor.git"
+  },
+  "author": "Khalid Moosa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grmpyktn11/cool-performance-monitor/issues"
+  },
+  "homepage": "https://github.com/grmpyktn11/cool-performance-monitor#readme",
+  "devDependencies": {
+    "electron": "^36.2.1"
+  },
+  "dependencies": {
+    "systeminformation": "^5.25.11"
+  }
+}
