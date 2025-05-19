@@ -3,6 +3,7 @@ const cpuUsageDisplay = document.getElementById("cpu-usage")
 const cpuBar = document.getElementById("cpu-bar")
 const ramDisplay = document.getElementById("ram-usage")
 const ramBar = document.getElementById("ram-bar")
+const wifiDisplay = document.getElementById("wifi-display")
 const programmingFacts = [
   "The first computer bug was an actual moth stuck in a relay (1947).",
   "The term 'debugging' comes from removing that moth from Harvard's Mark II computer.",
@@ -95,16 +96,42 @@ const updateRamUsage = async () => {
         ramDisplay.innerText = "cannot get ram usage"
     }
 }
-
+const updateWifi =async () => {
+    try{
+        const wifi = await window.versions.wifiSignal()
+        console.log(`wifi in renderer: ${wifi}`)
+        switch(wifi){
+            case 1:
+                wifiDisplay.innerText = "Wifi Signal: Great";
+                wifiDisplay.style.color = "green"
+                break;
+            case 2: 
+            wifiDisplay.innerText = "Wifi Signal: Okay";
+            wifiDisplay.style.color = "yellow"
+            break;
+            case 3:
+            wifiDisplay.innerText = "Wifi Signal: Bad";
+            wifiDisplay.style.color = "red"
+            break;
+            default:
+                wifiDisplay.innerText = "error";
+        } 
+    }
+    catch (error){
+        wifiDisplay.innerText = "error"
+    }
+}
 const updateFact = () => {
     const randomIndex = Math.floor(Math.random() * programmingFacts.length);
     factoid.innerText = programmingFacts[randomIndex];
 }
 
+
 const updateStats = () =>{
     updateCpuTemp();
     updateCPUUsage();
     updateRamUsage();
+    updateWifi();
 }
 
 updateStats(); // Initial update

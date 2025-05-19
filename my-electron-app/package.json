@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "test"
+    "test": "test",
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -18,9 +20,24 @@
   },
   "homepage": "https://github.com/grmpyktn11/cool-performance-monitor#readme",
   "devDependencies": {
-    "electron": "^36.2.1"
+    "electron": "^36.2.1",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "systeminformation": "^5.25.11"
+  },
+  "build": {
+    "appId": "com.khalid.resource-monitor",
+    "productName": "Resource Monitor",
+    "win": {
+      "target": "nsis", 
+      "requestedExecutionLevel": "requireAdministrator"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "runAfterFinish": true
+    }
   }
 }

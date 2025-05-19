@@ -9,7 +9,10 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    autoHideMenuBar: true,
+    frame: true
+
   })
 
   win.loadFile('index.html')
@@ -47,7 +50,6 @@ app.whenReady().then(() => {
   ipcMain.handle("getRam", async () =>{
     try{
       const ram = await si.mem();
-      console.log(ram.used/ram.total * 100);
       const usedRam = Math.floor(ram.used/ram.total * 100);
       return usedRam;
     }
@@ -57,8 +59,24 @@ app.whenReady().then(() => {
     }
   })
 
+  //getting wifi  strength
+  ipcMain.handle("getWifi", async () =>{
+    try{
+      const wifiStrength = (await si.wifiConnections())[0].signalLevel;
+      console.log(wifiStrength);
+      return (wifiStrength <= -70) ? 3
+      : (wifiStrength <= -60) ? 2
+      : 1
+     }
+    catch(error){
+        console.error("ERROR GETTING WIFI");
+        return -1;
+    } 
+  })
+
 
   createWindow()
+ 
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
