@@ -15,6 +15,7 @@ const createWindow = () => {
   win.loadFile('index.html')
 }
 
+
 app.whenReady().then(() => {
 
   
@@ -41,6 +42,21 @@ app.whenReady().then(() => {
       return { error: "error getting cpu usage"}
     }
   })
+
+  //getting ram
+  ipcMain.handle("getRam", async () =>{
+    try{
+      const ram = await si.mem();
+      console.log(ram.used/ram.total * 100);
+      const usedRam = Math.floor(ram.used/ram.total * 100);
+      return usedRam;
+    }
+    catch(error){
+      console.error("ERROR GETTING RAM");
+      return{ error: "error getting ram usage"}
+    }
+  })
+
 
   createWindow()
 
