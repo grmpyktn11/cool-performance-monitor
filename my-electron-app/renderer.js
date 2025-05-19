@@ -1,14 +1,26 @@
 const cpuTempDisplay = document.getElementById('cpu-temp');
 const cpuUsageDisplay = document.getElementById("cpu-usage")
+const cpuBar = document.getElementById("cpu-bar")
 
+const makeBar = (percentage) =>{
+    let hashNum = Math.floor(percentage / 4);
+    let dashNum = 25 - hashNum;
+
+    return `<${'#'.repeat(hashNum)}${'-'.repeat(dashNum)}> `
+}
 const updateCpuTemp = async () => {
     try {
         // Call the function to get the promise
+
         const cpuTemp = await window.versions.cpuTemp();
         // Check what properties are available
+        console.log(`${JSON.stringify(cpuTemp)}`);
         if (cpuTemp === undefined) {
             cpuTempDisplay.innerText = "CPU temp data is undefined";
-        } else {
+       
+        } if(Math.round(cpuTemp.main) == 0){
+            cpuTempDisplay.innerText = "Your system does not suppoer cpu temp monitoring. Did you enable admin perms?"
+        }  else {
             cpuTempDisplay.innerText = `CPUTemp data: ${Math.round(cpuTemp.main)}`;
             
         }
@@ -27,6 +39,7 @@ const updateCPUUsage = async () => {
         }
         else{
             cpuUsageDisplay.innerText = `CPU Usage data: ${Math.round(cpuUsage)}%`;
+            cpuBar.innerText = makeBar(cpuUsage);
         }
     }
     catch(error){

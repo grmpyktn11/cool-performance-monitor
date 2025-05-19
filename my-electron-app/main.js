@@ -17,6 +17,7 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
 
+  
   //GETTING CPUtemp
   ipcMain.handle("getCPUTemp", async () => {
     try {

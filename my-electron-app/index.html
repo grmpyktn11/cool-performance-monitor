@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     <title>PC performance monitor</title>
-
-     <style>
-      body{
-        background-color: #111827;
+    <style>
+      body {
+        background-color: #000000;
         color: #7ed957;
+        font-family: Handjet, sans-serif;
+      }
+      .container {
+        display: flex; 
+        width: 100%;
+      }
+      .art {
+        width: 60%;
+      }
+      .art pre{
+        max-height: 100vh;
+        overflow-y: auto;
+        display: block;
+      }
+      .temps {
+        width: 40%;
+        font-size: 32px;
+      }
+      .data{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 27px;
+        flex-grow: 1;
+        flex-shrink: 1;
+        min-width: 0;
+        min-height: 0;
+        overflow-y: auto;
+        width: 100%;
+        row-gap: 0px;
+        gap: 0px;
+      }
+      .data p{
+        margin: 0;
+      }
+      pre {
+        margin: 0; 
       }
     </style>
   </head>
   
   <body>
-    <p><pre>
+    <div class="container">
+      <div class="art">
+        <pre style="font-size: 20px;">
 ⡆⣿⣿⣦⠹⣳⣳⣕⢅⠈⢗⢕⢕⢕⢕⢕⢈⢆⠟⠋⠉⠁⠉⠉⠁⠈⠼⢐⢕
 ⡗⢰⣶⣶⣦⣝⢝⢕⢕⠅⡆⢕⢕⢕⢕⢕⣴⠏⣠⡶⠛⡉⡉⡛⢶⣦⡀⠐⣕
 ⡝⡄⢻⢟⣿⣿⣷⣕⣕⣅⣿⣔⣕⣵⣵⣿⣿⢠⣿⢠⣮⡈⣌⠨⠅⠹⣷⡀⢱
@@ -24,10 +65,17 @@
 ⡻⣄⣻⣿⣌⠘⢿⣷⣥⣿⠇⣿⣿⣿⣿⣿⣿⠛⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣷⢄⠻⣿⣟⠿⠦⠍⠉⣡⣾⣿⣿⣿⣿⣿⣿⢸⣿⣦⠙⣿⣿⣿⣿⣿⣿⣿⣿
 ⡕⡑⣑⣈⣻⢗⢟⢞⢝⣻⣿⣿⣿⣿⣿⣿⣿⠸⣿⠿⠃⣿⣿⣿⣿⣿⣿⡿⠁
-    </pre></p>
-    <p id="cpu-temp"></p>
+        </pre>
+      </div>
+      <div id="cpu-temp" class="temps"></div>
+    </div>
+
+    <div class="data">
     <p id="cpu-usage"></p>
-    <p id="ram-usage"></p>
+    <p id="cpu-bar"><###########------------></p>
+    <p id="ram-usage">wam</p>
+    <p id="ram-bar"><###########------------></p>
+    </div>
+    <script src="./renderer.js"></script>
   </body>
-  <script src="./renderer.js"></script>
 </html>
