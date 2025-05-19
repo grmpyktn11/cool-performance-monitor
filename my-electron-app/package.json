@@ -4,7 +4,6 @@
   "description": "a cool looking monitor",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
     "test": "test",
     "start": "electron .",
     "dist": "electron-builder"
@@ -28,10 +27,11 @@
   },
   "build": {
     "appId": "com.khalid.resource-monitor",
-    "productName": "Resource Monitor",
+    "productName": "cool resource monitor",
     "win": {
       "target": "nsis", 
-      "requestedExecutionLevel": "requireAdministrator"
+      "requestedExecutionLevel": "requireAdministrator",
+      "icon": "my-electron-app/build/icon.ico"
     },
     "nsis": {
       "oneClick": false,
